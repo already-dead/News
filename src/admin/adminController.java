@@ -43,7 +43,7 @@ public class adminController extends HttpServlet {
 
         if (session.getAttribute("loginStatus") == null)/*((session.getAttribute("loginStatus") == null) || !(session.getAttribute("loginStatus").equals("ON")) || (session.getAttribute("login") == null))*/ {
             com = new ToStartCommand();
-            //LogApp.log(e);
+            //LogApp.log(e);111
         } else {
             if ((request.getParameter("operation") != null)) {
                 String operation = request.getParameter("operation");
