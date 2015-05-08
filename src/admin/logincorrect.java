@@ -3,8 +3,6 @@ package admin;
 import dao.Dao;
 import dao.MyDao;
 import data.Users;
-import logger.LogApp;
-import logger.TrueLogger;
 import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -45,7 +43,8 @@ public class logincorrect extends HttpServlet {
         String target;
         Dao dao = MyDao.getDao();
         HttpSession session = request.getSession();
-        if (request.getParameter("email") != "") {
+        //if (request.getParameter("email") != "") {
+        if (!request.getParameter("email").equals("")) {
             //LogApp.log(e1);
             //System.out.println("Идентификация - 1");
             String email = request.getParameter("email");
@@ -62,7 +61,7 @@ public class logincorrect extends HttpServlet {
                 //System.out.println("Идентификация - 2");
             } else target = "incorrectInfo.html";
             //LogApp.log(e1);
-            //System.out.println("Идентификация пройдена");
+            //System.out.println("Идентификация пройдена");тест2
         } else target = "incorrectInfo.html";//else target = "PageContlorPanel"";
 
         RequestDispatcher dispatcher = request.getRequestDispatcher(target);
