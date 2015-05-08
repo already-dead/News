@@ -5,6 +5,7 @@ import dao.MyDao;
 import data.Users;
 import logger.LogApp;
 import logger.TrueLogger;
+import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,6 +19,7 @@ import java.io.IOException;
  * Servlet implementation class logincorrect
  */
 public class logincorrect extends HttpServlet {
+    private static final Logger log = Logger.getLogger(logincorrect.class);
 
     private static final long serialVersionUID = 2L;
 
@@ -67,10 +69,10 @@ public class logincorrect extends HttpServlet {
         try {
             dispatcher.include(request, response);
         } catch (IOException e) {
-            TrueLogger.getLogger().write("������ � ������ logincorrect. ��� ������� dispatcher.include(request, response);! -- " + e); // ������ � ���-����
+            log.error("������ � ������ logincorrect. ��� ������� dispatcher.include(request, response);! -- " + e); // ������ � ���-����
             e.printStackTrace();
         } catch (Exception e1) {
-            TrueLogger.getLogger().write("������ � ������ logincorrect. ��� ������� dispatcher.include(request, response);! -- " + e1); // ������ � ���-����
+            log.error("������ � ������ logincorrect. ��� ������� dispatcher.include(request, response);! -- " + e1); // ������ � ���-����
             e1.printStackTrace();
         }
     }

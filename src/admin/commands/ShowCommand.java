@@ -4,6 +4,7 @@ import dao.Dao;
 import dao.MyDao;
 import data.Page;
 import logger.TrueLogger;
+import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ShowCommand extends Command {
+    private static final Logger log = Logger.getLogger(ShowCommand.class);
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
@@ -77,10 +79,10 @@ public class ShowCommand extends Command {
         try {
             dispatcher.forward(request, response);
         } catch (ServletException e) {
-            TrueLogger.getLogger().write("NumberFormatException � ������ execute ������ EditWriteCommand! -- " + e);
+            log.error("NumberFormatException � ������ execute ������ EditWriteCommand! -- " + e);
             e.printStackTrace();
         } catch (IOException e) {
-            TrueLogger.getLogger().write("NumberFormatException � ������ execute ������ EditWriteCommand! -- " + e);
+            log.error("NumberFormatException � ������ execute ������ EditWriteCommand! -- " + e);
             e.printStackTrace();
         }
 

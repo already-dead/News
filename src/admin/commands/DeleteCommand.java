@@ -5,13 +5,14 @@ import dao.MyDao;
 import data.Page;
 import logger.LogApp;
 import logger.TrueLogger;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class DeleteCommand extends Command {
-
+    private static final Logger log = Logger.getLogger(DeleteCommand.class);
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("text/html; charset=UTF-8");
@@ -29,13 +30,13 @@ public class DeleteCommand extends Command {
 
             response.sendRedirect("adminController");
         } catch (IOException e) {
-            TrueLogger.getLogger().write("IOException � ������ execute ������ DeleteCommand! -- " + e); // ������ � ���-����
+            log.error("IOException � ������ execute ������ DeleteCommand! -- " + e); // ������ � ���-����
             e.printStackTrace();
         } catch (NumberFormatException e2) {
-            TrueLogger.getLogger().write("NumberFormatException � ������ execute ������ DeleteCommand! -- " + e2); // ������ � ���-����
+            log.error("NumberFormatException � ������ execute ������ DeleteCommand! -- " + e2); // ������ � ���-����
             e2.printStackTrace();
         } catch (NullPointerException e1) {
-            TrueLogger.getLogger().write("NullPointerException � ������ execute ������ DeleteCommand! -- " + e1); // ������ � ���-����
+            log.error("NullPointerException � ������ execute ������ DeleteCommand! -- " + e1); // ������ � ���-����
             e1.printStackTrace();
         }
     }

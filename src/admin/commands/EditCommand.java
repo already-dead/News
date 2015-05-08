@@ -2,6 +2,7 @@ package admin.commands;
 
 import logger.LogApp;
 import logger.TrueLogger;
+import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 public class EditCommand extends Command {
+    private static final Logger log = Logger.getLogger(EditCommand.class);
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
@@ -25,10 +27,10 @@ public class EditCommand extends Command {
         try {
             dispatcher.forward(request, response);
         } catch (ServletException e) {
-            TrueLogger.getLogger().write("ServletException � ������ execute ������ EditCommand!" + e); // ������ � ���-����
+            log.error("ServletException � ������ execute ������ EditCommand!" + e); // ������ � ���-����
             e.printStackTrace();
         } catch (IOException e1) {
-            TrueLogger.getLogger().write("IOException � ������ execute ������ EditCommand! -- " + e1); // ������ � ���-����
+            log.error("IOException � ������ execute ������ EditCommand! -- " + e1); // ������ � ���-����
             e1.printStackTrace();
         }
 

@@ -4,11 +4,14 @@ import dao.Dao;
 import dao.MyDao;
 import data.Page;
 import logger.TrueLogger;
+import org.apache.log4j.Logger;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class AddWriteCommand extends Command {
+    private static final Logger log = Logger.getLogger(AddWriteCommand.class);
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
@@ -25,13 +28,13 @@ public class AddWriteCommand extends Command {
             dao.addPage(Page);
             response.sendRedirect("adminController");
         } catch (IOException e) {
-            TrueLogger.getLogger().write("IOException � ������ execute ������ AddWriteCommand! -- " + e); // ������ � ���-����
+            log.error("IOException � ������ execute ������ AddWriteCommand! -- " + e); // ������ � ���-����
             e.printStackTrace();
         } catch (NumberFormatException e2) {
-            TrueLogger.getLogger().write("NumberFormatException � ������ execute ������ AddWriteCommand! -- " + e2); // ������ � ���-����
+            log.error("NumberFormatException � ������ execute ������ AddWriteCommand! -- " + e2); // ������ � ���-����
             e2.printStackTrace();
         } catch (NullPointerException e1) {
-            TrueLogger.getLogger().write("NullPointerException � ������ execute ������ AddWriteCommand! -- " + e1); // ������ � ���-����
+            log.error("NullPointerException � ������ execute ������ AddWriteCommand! -- " + e1); // ������ � ���-����
             e1.printStackTrace();
         }
     }

@@ -3,6 +3,7 @@ import data.Page;
 import data.Users;
 import logger.LogApp;
 import logger.TrueLogger;
+import org.apache.log4j.Logger;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Properties;
 
 public class MyDao implements Dao {
+    private static final Logger log = Logger.getLogger(MyDao.class);
     private Connection myConnection;
 
     private static final long serialVersionUID = 4L;
@@ -22,23 +24,24 @@ public class MyDao implements Dao {
     private String user;
     private String password;
     private Properties properties = new Properties();
-    private static final String FILE_PROPERTIES_NAME = "C:\\Users\\ragexe\\ОЦ ПВТ\\Макейчик_WebApplication\\WebApplication\\config.properties";
+    private static final String FILE_PROPERTIES_NAME = "E:\\News\\News\\config.properties";
 
     private MyDao() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            TrueLogger.getLogger().write(e.getMessage());
+            log.error("error");
+            log.error(e.getMessage());
         }
 
 
         try {
             properties.load(new FileInputStream(FILE_PROPERTIES_NAME));
         } catch (FileNotFoundException e) {
-            TrueLogger.getLogger().write(e.getMessage());
+            log.error(e.getMessage());
             e.printStackTrace();
         } catch (IOException e1) {
-            TrueLogger.getLogger().write(e1.getMessage());
+            log.error(e1.getMessage());
             e1.printStackTrace();
         }
         try {
@@ -46,7 +49,7 @@ public class MyDao implements Dao {
             user = properties.getProperty("db.user");
             password = properties.getProperty("db.password");
         } catch (NullPointerException e) {
-            TrueLogger.getLogger().write(e.getMessage());
+            log.error(e.getMessage());
             e.printStackTrace();
         }
 
@@ -58,7 +61,7 @@ public class MyDao implements Dao {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            TrueLogger.getLogger().write(e.getMessage());
+            log.error(e.getMessage());
         }
 
     }
@@ -89,7 +92,7 @@ public class MyDao implements Dao {
             } else
                 return null;
         } catch (SQLException e) {
-            TrueLogger.getLogger().write(e.getMessage());
+            log.error(e.getMessage());
             e.printStackTrace();
         }
         return data;
@@ -116,9 +119,9 @@ public class MyDao implements Dao {
 
             }
         } catch (SQLException e) {
-            //TrueLogger.getLogger().write(e.getMessage());
+            //log.error(e1.getMessage());
             e.printStackTrace();
-            TrueLogger.getLogger().write(e.getMessage());
+            log.error(e.getMessage());
         }
         return pages;
     }
@@ -134,7 +137,7 @@ public class MyDao implements Dao {
         try {
             pStatement = connection.prepareStatement(saddPage);
         } catch (SQLException e1) {
-            TrueLogger.getLogger().write(e1.getMessage());
+            log.error(e1.getMessage());
             e1.printStackTrace();
         }
         try {
@@ -146,13 +149,13 @@ public class MyDao implements Dao {
             pStatement.setString(6, data.getDate());
             pStatement.setString(7, data.getMaintext());
         } catch (SQLException e1) {
-            TrueLogger.getLogger().write(e1.getMessage());
+            log.error(e1.getMessage());
             e1.printStackTrace();
         }
         try {
             add = pStatement.executeUpdate();
         } catch (SQLException e1) {
-            TrueLogger.getLogger().write(e1.getMessage());
+            log.error(e1.getMessage());
             e1.printStackTrace();
         }
         return add;
@@ -169,19 +172,19 @@ public class MyDao implements Dao {
         try {
             pStatement = connection.prepareStatement(sdeletePage);
         } catch (SQLException e1) {
-            TrueLogger.getLogger().write(e1.getMessage());
+            log.error(e1.getMessage());
             e1.printStackTrace();
         }
         try {
             pStatement.setString(1, data.getId());
         } catch (SQLException e1) {
-            TrueLogger.getLogger().write(e1.getMessage());
+            log.error(e1.getMessage());
             e1.printStackTrace();
         }
         try {
             add = pStatement.executeUpdate();
         } catch (SQLException e1) {
-            TrueLogger.getLogger().write(e1.getMessage());
+            log.error(e1.getMessage());
             e1.printStackTrace();
         }
         return add;
@@ -198,7 +201,7 @@ public class MyDao implements Dao {
         try {
             pStatement = connection.prepareStatement(seditPage);
         } catch (SQLException e1) {
-            TrueLogger.getLogger().write(e1.getMessage());
+            log.error(e1.getMessage());
             e1.printStackTrace();
         }
         try {
@@ -210,13 +213,13 @@ public class MyDao implements Dao {
             pStatement.setString(6, data.getMaintext());
             pStatement.setString(7, data.getId());
         } catch (SQLException e1) {
-            TrueLogger.getLogger().write(e1.getMessage());
+            log.error(e1.getMessage());
             e1.printStackTrace();
         }
         try {
             add = pStatement.executeUpdate();
         } catch (SQLException e1) {
-            TrueLogger.getLogger().write(e1.getMessage());
+            log.error(e1.getMessage());
             e1.printStackTrace();
         }
         return add;
@@ -239,7 +242,7 @@ public class MyDao implements Dao {
                 ussr.setRole(result.getInt("role"));
             }
         } catch (SQLException e) {
-            TrueLogger.getLogger().write(e.getMessage());
+            log.error(e.getMessage());
             e.printStackTrace();
         }
         return ussr;
@@ -262,7 +265,7 @@ public class MyDao implements Dao {
                 user.add(usr);
             }
         } catch (SQLException e) {
-            TrueLogger.getLogger().write(e.getMessage());
+            log.error(e.getMessage());
             e.printStackTrace();
         }
         return user;

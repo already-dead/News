@@ -1,6 +1,8 @@
 package admin.commands;
 
 import logger.TrueLogger;
+import org.apache.log4j.Logger;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class AddCommand extends Command {
+    private static final Logger log = Logger.getLogger(AddCommand.class);
+
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
@@ -16,10 +20,10 @@ public class AddCommand extends Command {
         try {
             dispatcher.forward(request, response);
         } catch (ServletException e) {
-            TrueLogger.getLogger().write("ServletException � ������ execute ������ AddCommand!" + e.getMessage()); // ������ � ���-����
+            log.error("ServletException � ������ execute ������ AddCommand!" + e.getMessage()); // ������ � ���-����
             e.printStackTrace();
         } catch (IOException e1) {
-            TrueLogger.getLogger().write("IOException � ������ execute ������ AddCommand! -- " + e1.getMessage()); // ������ � ���-����
+            log.error("IOException � ������ execute ������ AddCommand! -- " + e1.getMessage()); // ������ � ���-����
             e1.printStackTrace();
         }
     }
